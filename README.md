@@ -29,7 +29,7 @@ We define a novel graph-based representation of neural networks called *relation
 We recommend using Conda package manager
 
 ```bash
-conda create -n graph2nn python=3.6
+conda create -n graph2nn python=3.9
 conda activate graph2nn
 ```
 
@@ -37,7 +37,7 @@ conda activate graph2nn
 Manually install [PyTorch](https://pytorch.org/) with **CUDA** support (CPU version is not supported). 
 We have verified under PyTorch 1.4.0 and torchvision 0.5.0. For example:
 ```bash
-pip install torch==1.4.0 torchvision==0.5.0
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
 ``` 
 
 **Clone graph2nn repository and install:**
@@ -46,6 +46,9 @@ pip install torch==1.4.0 torchvision==0.5.0
 git clone https://github.com/facebookresearch/graph2nn
 cd graph2nn
 pip install -r requirements.txt
+pip uninstall typing_extensions
+pip uninstall fastapi
+pip install --no-cache fastapi==0.103.2
 python setup.py develop
 ```
 
