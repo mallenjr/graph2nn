@@ -75,7 +75,7 @@ def compute_precise_bn_stats(model, loader):
 
 def get_flat_weights(model):
     """Gets all model weights as a single flat vector."""
-    return torch.cat([p.data.view(-1, 1) for p in model.parameters()], 0)
+    return torch.cat([p.data.reshape(-1, 1) for p in model.parameters()], 0)
 
 
 def set_flat_weights(model, flat_weights):

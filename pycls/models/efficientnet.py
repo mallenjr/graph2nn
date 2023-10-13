@@ -79,7 +79,7 @@ class SimpleHead(nn.Module):
 
     def forward(self, x):
         x = self.avg_pool(x)
-        x = x.view(x.size(0), -1)
+        x = x.reshape(x.size(0), -1)
         x = self.dropout(x) if hasattr(self, 'dropout') else x
         x = self.fc(x)
         return x
@@ -115,7 +115,7 @@ class ConvHead(nn.Module):
         x = self.conv_swish(self.conv_bn(self.conv(x)))
         # AvgPool
         x = self.avg_pool(x)
-        x = x.view(x.size(0), -1)
+        x = x.reshape(x.size(0), -1)
         # Dropout
         x = self.dropout(x) if hasattr(self, 'dropout') else x
         # FC
@@ -144,7 +144,7 @@ class LinearHead(nn.Module):
     def forward(self, x):
         # AvgPool
         x = self.avg_pool(x)
-        x = x.view(x.size(0), -1)
+        x = x.reshape(x.size(0), -1)
         # Linear, BN, Swish
         x = self.fc0_swish(self.fc0_bn(self.fc0(x)))
         # FC

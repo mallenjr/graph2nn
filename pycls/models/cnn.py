@@ -201,7 +201,7 @@ class CNNHead(nn.Module):
 
     def forward(self, x):
         x = self.avg_pool(x)
-        x = x.view(x.size(0), -1)
+        x = x.reshape(x.size(0), -1)
         x = self.fc(x)
         return x
 

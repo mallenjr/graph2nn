@@ -22,6 +22,7 @@ from torch.autograd import Function
 
 from itertools import repeat
 from networkx.utils import py_random_state
+import networkx as nx
 from pycls.datasets.load_graph import load_graph
 
 import pdb
@@ -90,7 +91,7 @@ def connected_ws_graph(n, k, p, tries=100, seed=1):
 def nx_to_edge(graph, directed=False, add_self_loops=True,
                shuffle_id=False, seed=1):
     '''nx graph to edge index'''
-    graph.remove_edges_from(graph.selfloop_edges())
+    graph.remove_edges_from(nx.selfloop_edges(graph))
     # relabel graphs
     keys = list(graph.nodes)
     vals = list(range(graph.number_of_nodes()))

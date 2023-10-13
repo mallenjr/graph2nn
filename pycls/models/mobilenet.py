@@ -86,6 +86,6 @@ class MobileNetV1(nn.Module):
     def forward(self, x):
         x = self.model(x)
         x = F.avg_pool2d(x, 7)
-        x = x.view(-1, self.dim_list[5])
+        x = x.reshape(-1, self.dim_list[5])
         x = self.fc(x)
         return x

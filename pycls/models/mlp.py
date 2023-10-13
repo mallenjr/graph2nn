@@ -124,8 +124,8 @@ class GroupShuffleLinearTransform(nn.Module):
 
     def forward(self, x):
         x = self.a(x)
-        x = x.view(x.shape[0], self.shuffle_shape[0], self.shuffle_shape[1]).permute(0, 2, 1).contiguous()
-        x = x.view(x.shape[0], x.shape[1] * x.shape[2])
+        x = x.reshape(x.shape[0], self.shuffle_shape[0], self.shuffle_shape[1]).permute(0, 2, 1).contiguous()
+        x = x.reshape(x.shape[0], x.shape[1] * x.shape[2])
         x = self.a_bn(x)
         x = self.relu(x)
         return x
@@ -202,7 +202,7 @@ class MLPStem(nn.Module):
         self.relu = nn.ReLU(cfg.MEM.RELU_INPLACE)
 
     def forward(self, x):
-        x = x.view(x.size(0), -1)
+        x = x.reshape(x.size(0), -1)
         for layer in self.children():
             x = layer(x)
         return x
